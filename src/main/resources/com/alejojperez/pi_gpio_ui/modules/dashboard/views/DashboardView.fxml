@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alejojperez.pi_gpio_ui.modules.dashboard.views.DashboardView">
+    <padding>
+        <Insets left="150.0" right="150.0" top="30.0" />
+    </padding>
+    <children>
+        <Label fx:id="formValidationMessage" text="Testing" prefWidth="400.0" styleClass="alert, alert-info, text-size-16" wrapText="true" />
+    </children>
+
+    <stylesheets>
+        <URL value="@../../../CSS/app.css" />
+    </stylesheets>
+</VBox>
