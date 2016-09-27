@@ -10,7 +10,7 @@
         <Insets left="150.0" right="150.0" top="30.0" />
     </padding>
     <children>
-        <Label fx:id="formValidationMessage" text="Testing" prefWidth="400.0" styleClass="alert, alert-info, text-size-16" wrapText="true" />
+        <Label text="Testing" prefWidth="400.0" styleClass="alert, alert-info, text-size-16" wrapText="true" />
     </children>
 
     <stylesheets>
