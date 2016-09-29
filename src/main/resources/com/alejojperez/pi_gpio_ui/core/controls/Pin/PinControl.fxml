@@ -1,0 +1,12 @@
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+
+<?import java.net.URL?>
+<fx:root type="javafx.scene.control.ToggleButton" contentDisplay="TOP" xmlns:fx="http://javafx.com/fxml">
+    <graphic>
+        <FontAwesomeIconView styleClass="pin" fx:id="fontIcon" glyphName="MAP_PIN" />
+    </graphic>
+
+    <stylesheets>
+        <URL value="@pin.css" />
+    </stylesheets>
+</fx:root>

@@ -5,6 +5,7 @@
 package com.alejojperez.pi_gpio_ui;
 
 import com.alejojperez.pi_gpio_ui.core.contracts.IPresenter;
+import com.alejojperez.pi_gpio_ui.core.controls.PinControl;
 import com.alejojperez.pi_gpio_ui.modules.dashboard.DashboardModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;

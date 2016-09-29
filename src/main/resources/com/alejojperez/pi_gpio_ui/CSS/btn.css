@@ -16,6 +16,9 @@
 .btn-shadow:pressed {
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, .125), 10, .3, 0, 0);
 }
+.toggle-btn:selected {
+    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, .3), 15, .3, 0, 3);
+}
 
 /**
  * Danger
