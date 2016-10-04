@@ -1,5 +1,7 @@
 package com.alejojperez.pi_gpio_ui.modules.dashboard;
 
+import com.alejojperez.pi_gpio.core.contracts.IPin;
+import com.alejojperez.pi_gpio.core.implementations.Pin;
 import com.alejojperez.pi_gpio_ui.core.contracts.IPresenter;
 import com.google.inject.AbstractModule;
 
