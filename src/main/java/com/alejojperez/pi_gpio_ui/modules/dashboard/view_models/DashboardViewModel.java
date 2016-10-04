@@ -5,8 +5,10 @@
 package com.alejojperez.pi_gpio_ui.modules.dashboard.view_models;
 
 import com.alejojperez.pi_gpio.core.contracts.IGPIOController;
+import com.alejojperez.pi_gpio.core.contracts.IPin;
 import com.alejojperez.pi_gpio.core.implementations.GPIOController;
 import de.saxsys.mvvmfx.ViewModel;
+import javafx.collections.ObservableMap;
 
 public class DashboardViewModel implements ViewModel
 {
@@ -15,13 +17,19 @@ public class DashboardViewModel implements ViewModel
     public DashboardViewModel()
     {
         this.controller = GPIOController.getInstance();
-        this.refreshPins();
+        this.loadPins();
     }
 
-    public void refreshPins()
+    public ObservableMap<String, IPin> getPinsList()
     {
-        this.controller.addPin("Red", 1);
-        this.controller.addPin("Blue", 2);
-        this.controller.addPin("Yellow", 3);
+        return this.controller.getAll();
+    }
+
+    public void loadPins()
+    {
+        this.controller
+                .addPin("Red", 1)
+                .addPin("Blue", 2)
+                .addPin("Yellow", 3);
     }
 }

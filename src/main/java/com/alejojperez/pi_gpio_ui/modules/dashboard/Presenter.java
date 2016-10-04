@@ -2,6 +2,7 @@ package com.alejojperez.pi_gpio_ui.modules.dashboard;
 
 import com.alejojperez.pi_gpio_ui.App;
 import com.alejojperez.pi_gpio_ui.core.contracts.IPresenter;
+import com.alejojperez.pi_gpio_ui.modules.dashboard.view_models.DashboardViewModel;
 import com.alejojperez.pi_gpio_ui.modules.dashboard.views.DashboardView;
 import de.saxsys.mvvmfx.FluentViewLoader;
 import de.saxsys.mvvmfx.ViewModel;
@@ -33,7 +34,7 @@ public class Presenter implements IPresenter
         stage.setHeight(primaryScreenBounds.getHeight());
 
         stage.setTitle("Traveler Thinker: Dashboard");
-        ViewTuple<DashboardView, ViewModel> viewTuple = FluentViewLoader.fxmlView(DashboardView.class).load();
+        ViewTuple<DashboardView, DashboardViewModel> viewTuple = FluentViewLoader.fxmlView(DashboardView.class).load();
 
         Parent root = viewTuple.getView();
         stage.setScene(new Scene(root));
