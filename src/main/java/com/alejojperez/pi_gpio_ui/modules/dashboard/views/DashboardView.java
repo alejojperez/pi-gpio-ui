@@ -18,6 +18,7 @@ import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -108,11 +109,42 @@ public class DashboardView implements FxmlView<DashboardViewModel>, Initializabl
 
                             HBox hBox = new HBox();
 
-                            FontAwesomeIconView icon = new FontAwesomeIconView(FontAwesomeIcon.POWER_OFF);
-                            String color = record.getValue().isInitialized() ? "179e6a" : "d9493e";
-                            icon.setGlyphStyle("-fx-fill: #" + color);
+                            /**
+                             * Initialize/Shut Down Button
+                             */
+                            FontAwesomeIconView iconPowerOff = new FontAwesomeIconView(FontAwesomeIcon.POWER_OFF);
+                            iconPowerOff.setGlyphStyle("-fx-fill: #fff");
 
-                            hBox.getChildren().addAll(icon);
+                            String cssClass, text;
+                            if(record.getValue().isInitialized()) {
+                                cssClass = "btn-warning";
+                                text = "OFF";
+                            } else {
+                                cssClass = "btn-success";
+                                text = "ON";
+                            }
+
+                            Button buttonPowerOff = new Button();
+                            buttonPowerOff.setText(text);
+                            buttonPowerOff.setGraphic(iconPowerOff);
+                            buttonPowerOff.getStyleClass().addAll("btn", "btn-xs", cssClass);
+
+                            /**
+                             * Delete Button
+                             */
+                            FontAwesomeIconView iconTimes = new FontAwesomeIconView(FontAwesomeIcon.TIMES);
+                            iconTimes.setGlyphStyle("-fx-fill: #fff");
+
+                            Button buttonDelete = new Button();
+                            buttonDelete.setText("Delete");
+                            buttonDelete.setGraphic(iconTimes);
+                            buttonDelete.getStyleClass().addAll("btn", "btn-xs", "btn-danger");
+
+                            /**
+                             * Add all components
+                             */
+                            hBox.setSpacing(5);
+                            hBox.getChildren().addAll(buttonPowerOff, buttonDelete);
                             hBox.setAlignment(Pos.CENTER);
 
                             return hBox;

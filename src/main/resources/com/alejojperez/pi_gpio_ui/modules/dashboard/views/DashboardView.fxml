@@ -18,7 +18,7 @@
             <columns>
                 <TableColumn fx:id="tcName" text="Name" />
                 <TableColumn fx:id="tcPinNumber" text="Pin #" />
-                <TableColumn fx:id="tcActions" editable="false" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" resizable="false" text="Init." />
+                <TableColumn fx:id="tcActions" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" resizable="false" text="Actions" />
             </columns>
 
             <columnResizePolicy>
