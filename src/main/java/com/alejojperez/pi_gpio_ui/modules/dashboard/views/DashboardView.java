@@ -6,11 +6,13 @@ package com.alejojperez.pi_gpio_ui.modules.dashboard.views;
 
 import com.alejojperez.pi_gpio.core.contracts.IPin;
 import com.alejojperez.pi_gpio_ui.modules.dashboard.view_models.DashboardViewModel;
-import de.jensd.fx.glyphs.GlyphsDude;
+import com.google.inject.Inject;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
+import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,9 +25,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -49,14 +48,25 @@ public class DashboardView implements FxmlView<DashboardViewModel>, Initializabl
     @InjectViewModel
     private DashboardViewModel viewModel;
 
+    @Inject
+    private NotificationCenter notificationCenter;
+
     public void initialize(URL location, ResourceBundle resources)
     {
         this.initializeTable();
+        this.initializeNotificationSubscribers();
     }
 
     // <editor-fold desc="Helpers">
 
-    protected void initializeTable()
+    private void initializeNotificationSubscribers()
+    {
+        this.notificationCenter.subscribe("module:dashboard:pinInitialized", (key, payload) -> {
+            Platform.runLater(() -> pinsTable.refresh());
+        });
+    }
+
+    private void initializeTable()
     {
         ObservableMap<String, IPin> pins = viewModel.getPinsList();
         ObservableList<Map.Entry<String, IPin>> listData = FXCollections.observableArrayList(pins.entrySet());
@@ -106,45 +116,61 @@ public class DashboardView implements FxmlView<DashboardViewModel>, Initializabl
                         private HBox generateContent()
                         {
                             Map.Entry<String, IPin> record = this.getTableView().getItems().get(this.getIndex());
+                            IPin pin = record.getValue();
+                            String pinKey = record.getKey();
 
                             HBox hBox = new HBox();
 
                             /**
-                             * Initialize/Shut Down Button
+                             * On Button
                              */
-                            FontAwesomeIconView iconPowerOff = new FontAwesomeIconView(FontAwesomeIcon.POWER_OFF);
-                            iconPowerOff.setGlyphStyle("-fx-fill: #fff");
+                            FontAwesomeIconView onIcon = new FontAwesomeIconView(FontAwesomeIcon.TOGGLE_ON);
+                            onIcon.setGlyphStyle("-fx-fill: #fff");
 
-                            String cssClass, text;
-                            if(record.getValue().isInitialized()) {
-                                cssClass = "btn-warning";
-                                text = "OFF";
-                            } else {
-                                cssClass = "btn-success";
-                                text = "ON";
-                            }
-
-                            Button buttonPowerOff = new Button();
-                            buttonPowerOff.setText(text);
-                            buttonPowerOff.setGraphic(iconPowerOff);
-                            buttonPowerOff.getStyleClass().addAll("btn", "btn-xs", cssClass);
+                            Button buttonOn = new Button();
+                            buttonOn.setGraphic(onIcon);
+                            buttonOn.getStyleClass().addAll("btn", "btn-xs", "btn-success");
+                            buttonOn.disableProperty().bind(viewModel.getPinOnCommand(pinKey).executableProperty().not());
+                            buttonOn.setOnAction(event -> viewModel.getPinOnCommand(pinKey).execute());
 
                             /**
-                             * Delete Button
+                             * Off Button
                              */
-                            FontAwesomeIconView iconTimes = new FontAwesomeIconView(FontAwesomeIcon.TIMES);
-                            iconTimes.setGlyphStyle("-fx-fill: #fff");
+                            FontAwesomeIconView offIcon = new FontAwesomeIconView(FontAwesomeIcon.TOGGLE_OFF);
+                            onIcon.setGlyphStyle("-fx-fill: #fff");
 
-                            Button buttonDelete = new Button();
-                            buttonDelete.setText("Delete");
-                            buttonDelete.setGraphic(iconTimes);
-                            buttonDelete.getStyleClass().addAll("btn", "btn-xs", "btn-danger");
+                            Button buttonOff = new Button();
+                            buttonOff.setGraphic(offIcon);
+                            buttonOff.getStyleClass().addAll("btn", "btn-xs", "btn-danger");
+                            buttonOff.disableProperty().bind(viewModel.getPinOffCommand(pinKey).executableProperty().not());
+                            buttonOff.setOnAction(event -> viewModel.getPinOffCommand(pinKey).execute());
+
+                            /**
+                             * Initialize/Destroy Button
+                             */
+                            FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.POWER_OFF);
+                            deleteIcon.setGlyphStyle("-fx-fill: #fff");
+
+                            String cssClass, text;
+                            if(pin.isInitialized()) {
+                                cssClass = "btn-warning";
+                                text = "Destroy";
+                            } else {
+                                cssClass = "btn-primary";
+                                text = "Initialize";
+                            }
+
+                            Button buttonInitializeDestroy = new Button();
+                            buttonInitializeDestroy.setText(text);
+                            buttonInitializeDestroy.setGraphic(deleteIcon);
+                            buttonInitializeDestroy.getStyleClass().addAll("btn", "btn-xs", cssClass);
+                            buttonInitializeDestroy.setOnAction(event -> viewModel.getInitializeDestroyPinCommand(pinKey).execute());
 
                             /**
                              * Add all components
                              */
                             hBox.setSpacing(5);
-                            hBox.getChildren().addAll(buttonPowerOff, buttonDelete);
+                            hBox.getChildren().addAll(buttonOn, buttonOff, buttonInitializeDestroy);
                             hBox.setAlignment(Pos.CENTER);
 
                             return hBox;

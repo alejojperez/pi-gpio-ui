@@ -1,7 +1,11 @@
 package com.alejojperez.pi_gpio_ui.modules.dashboard;
 
+import com.alejojperez.pi_gpio.core.contracts.IGPIOController;
+import com.alejojperez.pi_gpio.core.contracts.ILogger;
 import com.alejojperez.pi_gpio.core.contracts.IPin;
+import com.alejojperez.pi_gpio.core.implementations.GPIOController;
 import com.alejojperez.pi_gpio.core.implementations.Pin;
+import com.alejojperez.pi_gpio_ui.core.Logger;
 import com.alejojperez.pi_gpio_ui.core.contracts.IPresenter;
 import com.google.inject.AbstractModule;
 
@@ -13,6 +17,8 @@ public class DashboardModule extends AbstractModule
     @Override
     protected void configure()
     {
-        bind(IPresenter.class).to(Presenter.class);
+        this.bind(IPresenter.class).to(Presenter.class);
+        this.bind(ILogger.class).to(Logger.class);
+        this.bind(IGPIOController.class).toInstance(GPIOController.getInstance());
     }
 }
