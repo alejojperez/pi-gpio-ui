@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system>
+        <GPIO>
+            <pin>
+                <placeholder>${PIN_NUMBER}$</placeholder>
+                <paths>
+                    <direction>/Users/Alejandro/MyStuff/Code/Java/pi-gpio-ui/Testing Files/gpio${PIN_NUMBER}$/direction</direction>
+                    <export>/Users/Alejandro/MyStuff/Code/Java/pi-gpio-ui/Testing Files/export</export>
+                    <unexport>/Users/Alejandro/MyStuff/Code/Java/pi-gpio-ui/Testing Files/unexport</unexport>
+                    <value>/Users/Alejandro/MyStuff/Code/Java/pi-gpio-ui/Testing Files/gpio${PIN_NUMBER}$/value</value>
+                    <isInitialized>/Users/Alejandro/MyStuff/Code/Java/pi-gpio-ui/Testing Files/gpio${PIN_NUMBER}$</isInitialized>
+                    <generalPath>/Users/Alejandro/MyStuff/Code/Java/pi-gpio-ui/Testing Files</generalPath>
+                </paths>
+            </pin>
+        </GPIO>
+    </system>
+</configuration>

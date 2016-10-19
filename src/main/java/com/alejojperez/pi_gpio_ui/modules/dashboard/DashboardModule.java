@@ -1,5 +1,6 @@
 package com.alejojperez.pi_gpio_ui.modules.dashboard;
 
+import com.alejojperez.pi_gpio.core.Utils;
 import com.alejojperez.pi_gpio.core.contracts.IGPIOController;
 import com.alejojperez.pi_gpio.core.contracts.ILogger;
 import com.alejojperez.pi_gpio.core.contracts.IPin;
@@ -14,6 +15,11 @@ import com.google.inject.AbstractModule;
  */
 public class DashboardModule extends AbstractModule
 {
+    public DashboardModule()
+    {
+        Utils.configPath = "./target/classes/com/alejojperez/pi_gpio_ui/configuration.xml";
+    }
+
     @Override
     protected void configure()
     {
