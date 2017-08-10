@@ -5,12 +5,12 @@
             <pin>
                 <placeholder>${PIN_NUMBER}$</placeholder>
                 <paths>
-                    <direction>/Users/Alejandro/MyStuff/Code/Java/pi-gpio-ui/Testing Files/gpio${PIN_NUMBER}$/direction</direction>
-                    <export>/Users/Alejandro/MyStuff/Code/Java/pi-gpio-ui/Testing Files/export</export>
-                    <unexport>/Users/Alejandro/MyStuff/Code/Java/pi-gpio-ui/Testing Files/unexport</unexport>
-                    <value>/Users/Alejandro/MyStuff/Code/Java/pi-gpio-ui/Testing Files/gpio${PIN_NUMBER}$/value</value>
-                    <isInitialized>/Users/Alejandro/MyStuff/Code/Java/pi-gpio-ui/Testing Files/gpio${PIN_NUMBER}$</isInitialized>
-                    <generalPath>/Users/Alejandro/MyStuff/Code/Java/pi-gpio-ui/Testing Files</generalPath>
+                    <direction>./Testing Files/gpio${PIN_NUMBER}$/direction</direction>
+                    <export>./Testing Files/export</export>
+                    <unexport>./Testing Files/unexport</unexport>
+                    <value>./Testing Files/gpio${PIN_NUMBER}$/value</value>
+                    <isInitialized>./Testing Files/gpio${PIN_NUMBER}$</isInitialized>
+                    <generalPath>./Testing Files</generalPath>
                 </paths>
             </pin>
         </GPIO>
