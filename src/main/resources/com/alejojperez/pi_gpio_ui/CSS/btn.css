@@ -42,6 +42,7 @@
     -fx-background-color: #ed5565;
     -fx-border-color: #ed5565;
     -fx-text-fill: white;
+    -fx-fill: white;
 }
 .btn-danger:hover {
     -fx-background-color: #ec4758;
@@ -61,6 +62,7 @@
     -fx-background-color: #fff;
     -fx-border-color: transparent;
     -fx-text-fill: inherit;
+    -fx-fill: inherit;
 }
 .btn-default:hover {
     -fx-background-color: #d2d2d2;
@@ -79,6 +81,7 @@
     -fx-background-color: #23c6c8;
     -fx-border-color: #23c6c8;
     -fx-text-fill: white;
+    -fx-fill: white;
 }
 .btn-info:hover {
     -fx-background-color: #21b9bb;
@@ -98,6 +101,7 @@
     -fx-background-color: #1c84c6;
     -fx-border-color: #1c84c6;
     -fx-text-fill: white;
+    -fx-fill: white;
 }
 .btn-primary:hover {
     -fx-background-color: #1a7bb9;
@@ -117,6 +121,7 @@
     -fx-background-color: #1ab394;
     -fx-border-color: #1ab394;
     -fx-text-fill: white;
+    -fx-fill: white;
 }
 .btn-success:hover {
     -fx-background-color: #18a689;
@@ -136,6 +141,7 @@
     -fx-background-color: #f8ac59;
     -fx-border-color: #f8ac59;
     -fx-text-fill: white;
+    -fx-fill: white;
 }
 .btn-warning:hover {
     -fx-background-color: #f7a54a;

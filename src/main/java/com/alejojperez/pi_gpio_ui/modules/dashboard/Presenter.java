@@ -33,7 +33,7 @@ public class Presenter implements IPresenter
 //        stage.setWidth(primaryScreenBounds.getWidth());
 //        stage.setHeight(primaryScreenBounds.getHeight());
 
-        stage.setTitle("Traveler Thinker: Dashboard");
+        stage.setTitle("GPIO Pins: Dashboard");
         ViewTuple<DashboardView, DashboardViewModel> viewTuple = FluentViewLoader.fxmlView(DashboardView.class).load();
 
         Parent root = viewTuple.getView();
