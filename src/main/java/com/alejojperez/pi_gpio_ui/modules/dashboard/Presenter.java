@@ -1,5 +1,6 @@
 package com.alejojperez.pi_gpio_ui.modules.dashboard;
 
+import com.alejojperez.pi_gpio.core.implementations.GPIOController;
 import com.alejojperez.pi_gpio_ui.App;
 import com.alejojperez.pi_gpio_ui.core.contracts.IPresenter;
 import com.alejojperez.pi_gpio_ui.modules.dashboard.view_models.DashboardViewModel;
@@ -30,14 +31,15 @@ public class Presenter implements IPresenter
         stage.setY(primaryScreenBounds.getMinY());
         stage.setMinWidth(800);
         stage.setMinHeight(600);
-//        stage.setWidth(primaryScreenBounds.getWidth());
-//        stage.setHeight(primaryScreenBounds.getHeight());
 
         stage.setTitle("GPIO Pins: Dashboard");
         ViewTuple<DashboardView, DashboardViewModel> viewTuple = FluentViewLoader.fxmlView(DashboardView.class).load();
 
         Parent root = viewTuple.getView();
         stage.setScene(new Scene(root));
+
+        stage.setOnCloseRequest(event -> GPIOController.getInstance().finalize());
+
         stage.show();
     }
 }

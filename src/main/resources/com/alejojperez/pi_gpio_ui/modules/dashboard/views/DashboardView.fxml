@@ -69,5 +69,6 @@
 
     <stylesheets>
         <URL value="@../../../CSS/app.css" />
+        <URL value="@../CSS/DashboardView.css" />
     </stylesheets>
 </VBox>

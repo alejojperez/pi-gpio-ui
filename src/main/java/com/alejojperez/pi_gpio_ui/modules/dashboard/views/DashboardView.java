@@ -26,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
@@ -119,14 +120,7 @@ public class DashboardView implements FxmlView<DashboardViewModel>, Initializabl
          * Refresh TableView every time there is a change on the controller's pins
          */
         ObservableMap<String, IPin> pins = viewModel.getPinsList();
-        pins.addListener(new MapChangeListener<String, IPin>()
-        {
-            @Override
-            public void onChanged(Change<? extends String, ? extends IPin> change)
-            {
-                refreshTable();
-            }
-        });
+        pins.addListener((MapChangeListener<String, IPin>) change -> refreshTable());
 
         /**
          * Table Column Name
@@ -239,6 +233,17 @@ public class DashboardView implements FxmlView<DashboardViewModel>, Initializabl
                                     FontAwesomeIcon directionIcon = pin.getDirection().equals(Pin.GPIO_IN) ? FontAwesomeIcon.SIGN_IN : FontAwesomeIcon.SIGN_OUT;
                                     FontAwesomeIconView directionIconView = new FontAwesomeIconView(directionIcon);
                                     directionIconView.setGlyphStyle("-fx-fill: #" + color);
+
+                                    directionIconView.setOnMouseClicked(event -> {
+                                        if(event.getButton().equals(MouseButton.PRIMARY))
+                                        {
+                                            if(event.getClickCount() == 2)
+                                            {
+                                                viewModel.getPinDirectionCommand(pinKey).execute();
+                                            }
+                                        }
+                                    });
+
                                     hBox.getChildren().addAll(directionIconView);
                                 } else {
                                     Text text = new Text("N/A");
@@ -298,6 +303,21 @@ public class DashboardView implements FxmlView<DashboardViewModel>, Initializabl
                                     String color = pin.getValue().equals(Pin.GPIO_ON) ? "1b9957" : "d9493e";
                                     FontAwesomeIconView onOffIconView = new FontAwesomeIconView(FontAwesomeIcon.POWER_OFF);
                                     onOffIconView.setGlyphStyle("-fx-fill: #" + color);
+
+                                    onOffIconView.setOnMouseClicked(event -> {
+                                        if(event.getButton().equals(MouseButton.PRIMARY))
+                                        {
+                                            if(event.getClickCount() == 2)
+                                            {
+                                                if(pin.getValue().equals(Pin.GPIO_ON))
+                                                    viewModel.getPinOffCommand(pinKey).execute();
+                                                else
+                                                    viewModel.getPinOnCommand(pinKey).execute();
+
+                                            }
+                                        }
+                                    });
+
                                     hBox.getChildren().addAll(onOffIconView);
                                 } else {
                                     Text text = new Text("N/A");

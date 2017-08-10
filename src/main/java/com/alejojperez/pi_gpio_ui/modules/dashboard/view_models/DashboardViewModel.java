@@ -44,6 +44,10 @@ public class DashboardViewModel implements ViewModel
         this.loadPins();
     }
 
+    public IGPIOController getController() {
+        return controller;
+    }
+
     public ObservableMap<String, IPin> getPinsList()
     {
         return this.controller.getAll();
@@ -108,8 +112,10 @@ public class DashboardViewModel implements ViewModel
                             "module:dashboard:pinDirectionIn" :
                             "module:dashboard:pinDirectionOut";
 
-                    if(pin.getDirection().equals(Pin.GPIO_OUT)) pin.setDirection(Pin.GPIO_IN);
-                    else pin.setDirection(Pin.GPIO_OUT);
+                    if(pin.getDirection().equals(Pin.GPIO_OUT))
+                        pin.setDirection(Pin.GPIO_IN);
+                    else
+                        pin.setDirection(Pin.GPIO_OUT);
 
                     notificationCenter.publish(notification, pin);
                 }
